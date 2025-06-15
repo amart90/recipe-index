@@ -1,0 +1,74 @@
+<style>
+/* Align filters in a grid */
+.filter-panel {
+  margin-top: 1.5rem;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filter-input {
+  flex: 1 1 200px;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-input label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #444;
+  margin-bottom: 4px;
+}
+
+.filter-input select,
+.filter-input input[type="search"] {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+/* Reactable custom styling */
+.reactable {
+  font-family: system-ui, sans-serif;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.reactable .rt-thead.-header {
+  background-color: #f6f8fa;
+  border-bottom: 1px solid #ddd;
+}
+
+.reactable .rt-tr:hover {
+  background-color: #f0f8ff;
+}
+
+.reactable .rt-th, .reactable .rt-td {
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.reactable .rt-th {
+  font-weight: 600;
+  color: #555;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.4px;
+}
+
+/* Visually cue resizable columns */
+.reactable .rt-th {
+  position: relative;
+}
+
+.reactable .rt-resizable-header {
+  cursor: col-resize;
+}
+
+</style>

@@ -1,3 +1,11 @@
+project:
+  type: website
+  output-dir: _site  # this matches your deploy target
+
+website:
+  title: "Recipe Browser"
+  navbar: false      # or true if you later want navigation
+
 format:
   html:
     theme: default

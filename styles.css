@@ -62,4 +62,13 @@
   letter-spacing: 0.4px;
 }
 
+/* Visually cue resizable columns */
+.reactable .rt-th {
+  position: relative;
+}
+
+.reactable .rt-resizable-header {
+  cursor: col-resize;
+}
+
 </style>

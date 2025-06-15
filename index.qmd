@@ -128,7 +128,8 @@ recipe_table <- reactable(
   searchable = FALSE,
   pagination = TRUE,
   defaultPageSize = 10,
-  highlight = TRUE
+  highlight = TRUE,
+  resizable = TRUE
 )
 ```
 

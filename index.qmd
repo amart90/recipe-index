@@ -102,12 +102,16 @@ search_filter <- function(id, label, shared_data, group) {
 
 ```{r filters-and-table, include=FALSE}
 filters <- div(
-  class = "filters",
-  search_filter("search_name", "Search by Name", shared_data, "Name"),
-  select_filter("filter_type", "Type", shared_data, "Type"),
-  select_filter("filter_cuisine", "Cuisine", shared_data, "Cuisine"),
-  select_filter("filter_tool", "Tool", shared_data, "Tool"),
-  select_filter("filter_laura", "Laura friendly (GF/OF)?", shared_data, "Laura")
+  class = "filter-panel",
+  div(
+    class = "filter-row",
+    search_filter("search_name", "Search by Name", shared_data, "Name"),
+    select_filter("filter_type", "Type", shared_data, "Type"),
+    select_filter("filter_cuisine", "Cuisine", shared_data, "Cuisine"),
+    select_filter("filter_tool", "Tool", shared_data, "Tool"),
+    select_filter("filter_laura", "Laura friendly (GF/OF)?", shared_data, "Laura")
+    
+  )
 )
 
 recipe_table <- reactable(

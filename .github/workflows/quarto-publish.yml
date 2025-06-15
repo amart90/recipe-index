@@ -54,7 +54,7 @@ jobs:
 
       - name: Render Quarto project
         if: steps.sheetcheck.outcome != 'success'
-        run: quarto render
+        run: quarto render quarto.qmd
 
       - name: Deploy to GitHub Pages
         if: steps.sheetcheck.outcome != 'success'

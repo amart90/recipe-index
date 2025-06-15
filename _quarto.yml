@@ -1,0 +1,4 @@
+format:
+  html:
+    theme: default
+    css: styles.css

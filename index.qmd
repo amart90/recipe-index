@@ -9,14 +9,16 @@ library(dplyr)
 library(reactable)
 library(crosstalk)
 library(htmltools)
-library(janitor)
 
 # Read data from Google Sheet
+sheet_id <- Sys.getenv("SHEET_ID")
+if (sheet_id == "") stop("Missing SHEET_ID environment variable.")
+
 data <- read_sheet(
-  "1q57RAlUtp5dcjQjllqTWAm9K1xbL8nrfjjvH2IQmbGM",
-  sheet = "Recipe table"
-) %>%
-  clean_names()
+  sheet_id,
+  sheet = "Recipe table",
+  trim_ws = TRUE
+)
 
 # SharedData object for Crosstalk
 shared_data <- SharedData$new(data)
@@ -100,21 +102,23 @@ search_filter <- function(id, label, shared_data, group) {
 ```{r filters-and-table, include=FALSE}
 filters <- div(
   class = "filters",
-  search_filter("search_name", "Search by Name", shared_data, "name"),
-  select_filter("filter_type", "Type", shared_data, "type"),
-  select_filter("filter_cuisine", "Cuisine", shared_data, "cuisine"),
-  select_filter("filter_tool", "Tool", shared_data, "tool")
+  search_filter("search_name", "Search by Name", shared_data, "Name"),
+  select_filter("filter_type", "Type", shared_data, "Type"),
+  select_filter("filter_cuisine", "Cuisine", shared_data, "Cuisine"),
+  select_filter("filter_tool", "Tool", shared_data, "Tool"),
+  select_filter("filter_laura", "Laura friendly (GF/OF)?", shared_data, "Laura")
 )
 
 recipe_table <- reactable(
   shared_data,
   columns = list(
-    name = colDef(name = "Name"),
-    book = colDef(name = "Book"),
-    page = colDef(name = "Page"),
-    type = colDef(name = "Type"),
-    cuisine = colDef(name = "Cuisine"),
-    tool = colDef(name = "Tool")
+    Name = colDef(name = "Name"),
+    Book = colDef(name = "Book"),
+    Page = colDef(name = "Page"),
+    Type = colDef(name = "Type"),
+    Cuisine = colDef(name = "Cuisine"),
+    Tool = colDef(name = "Tool"),
+    Laura = colDef(name = "Laura Friendly")
   ),
   searchable = FALSE,
   pagination = TRUE,

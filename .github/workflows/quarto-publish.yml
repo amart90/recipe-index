@@ -1,0 +1,65 @@
+name: Quarto Publish with Google Sheet Check
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '*/15 * * * *'  # Every 15 minutes
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    env:
+      SHEET_ID: ${{ secrets.SHEET_ID }}  # load Google Sheet ID from GitHub Secrets
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Install lightweight R packages
+        run: |
+          Rscript -e "install.packages(c('googlesheets4', 'readr', 'dplyr'))"
+
+      - name: Check if Google Sheet has changed
+        run: |
+          echo "Checking sheet ID: $SHEET_ID"
+          Rscript check-sheet.R
+        continue-on-error: true
+        id: sheetcheck
+
+      - name: Exit early if no changes
+        if: steps.sheetcheck.outcome == 'success'
+        run: echo "No changes to data; skipping build."
+
+      - name: Install full R dependencies
+        if: steps.sheetcheck.outcome != 'success'
+        run: |
+          Rscript -e "install.packages(c('reactable', 'crosstalk', 'htmltools'))"
+
+      - name: Render Quarto project
+        if: steps.sheetcheck.outcome != 'success'
+        run: quarto render
+
+      - name: Deploy to GitHub Pages
+        if: steps.sheetcheck.outcome != 'success'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: gh-pages

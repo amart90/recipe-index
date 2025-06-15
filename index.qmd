@@ -11,6 +11,7 @@ library(crosstalk)
 library(htmltools)
 
 # Read data from Google Sheet
+googlesheets4::gs4_deauth()
 sheet_id <- Sys.getenv("SHEET_ID")
 if (sheet_id == "") stop("Missing SHEET_ID environment variable.")
 

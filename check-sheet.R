@@ -2,6 +2,7 @@ library(googlesheets4)
 library(dplyr)
 
 # Load sheet ID from environment variable
+googlesheets4::gs4_deauth()
 sheet_id <- Sys.getenv("SHEET_ID")
 if (sheet_id == "") stop("Missing SHEET_ID environment variable.")
 

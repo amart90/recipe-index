@@ -116,8 +116,8 @@ filters <- div(
 recipe_table <- reactable(
   shared_data,
   columns = list(
-    Name = colDef(name = "Name"),
-    Book = colDef(name = "Book"),
+    Name = colDef(name = "Name", minWidth = 180),
+    Book = colDef(name = "Book", minWidth = 120),
     Page = colDef(name = "Page"),
     Type = colDef(name = "Type"),
     Cuisine = colDef(name = "Cuisine"),
@@ -126,7 +126,7 @@ recipe_table <- reactable(
   ),
   searchable = FALSE,
   pagination = TRUE,
-  defaultPageSize = 10,
+  defaultPageSize = 20,
   highlight = TRUE,
   resizable = TRUE
 )

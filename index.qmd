@@ -105,12 +105,11 @@ filters <- div(
   class = "filter-panel",
   div(
     class = "filter-row",
-    search_filter("search_name", "Search by Name", shared_data, "Name"),
-    select_filter("filter_type", "Type", shared_data, "Type"),
-    select_filter("filter_cuisine", "Cuisine", shared_data, "Cuisine"),
-    select_filter("filter_tool", "Tool", shared_data, "Tool"),
-    select_filter("filter_laura", "Laura friendly (GF/OF)?", shared_data, "Laura")
-    
+    div(class = "filter-input", search_filter("search_name", "Search by Name", shared_data, "Name")),
+    div(class = "filter-input", select_filter("filter_type", "Type", shared_data, "Type")),
+    div(class = "filter-input", select_filter("filter_cuisine", "Cuisine", shared_data, "Cuisine")),
+    div(class = "filter-input", select_filter("filter_tool", "Tool", shared_data, "Tool")),
+    div(class = "filter-input", select_filter("filter_laura", "Laura friendly (GF/OF)?", shared_data, "Laura"))
   )
 )
 

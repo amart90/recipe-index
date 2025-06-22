@@ -4,8 +4,6 @@ format: html
 ---
 
 ```{r setup, include=FALSE}
-library(googlesheets4)
-library(dplyr)
 library(reactable)
 library(crosstalk)
 library(htmltools)
@@ -15,7 +13,7 @@ googlesheets4::gs4_deauth()
 sheet_id <- Sys.getenv("SHEET_ID")
 if (sheet_id == "") stop("Missing SHEET_ID environment variable.")
 
-data <- read_sheet(
+data <- googlesheets4::read_sheet(
   sheet_id,
   sheet = "Recipe table",
   trim_ws = TRUE

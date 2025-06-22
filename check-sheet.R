@@ -1,18 +1,14 @@
-library(googlesheets4)
-library(dplyr)
-
 # Load sheet ID from environment variable
 googlesheets4::gs4_deauth()
 sheet_id <- Sys.getenv("SHEET_ID")
 if (sheet_id == "") stop("Missing SHEET_ID environment variable.")
 
 # Read live sheet data
-live <- read_sheet(
+live <- googlesheets4::read_sheet(
   sheet_id,
   sheet = "Recipe table",
   trim_ws = TRUE
-) |>
-  arrange_all()
+)
 
 # Path to cached .rds file
 cache_file <- "data_cache.rds"

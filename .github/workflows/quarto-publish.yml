@@ -33,7 +33,7 @@ jobs:
 
       - name: Install lightweight R packages
         run: |
-          Rscript -e "install.packages(c('googlesheets4', 'readr', 'dplyr'))"
+          Rscript -e "install.packages('googlesheets4')"
 
       - name: Check if Google Sheet has changed
         run: |
